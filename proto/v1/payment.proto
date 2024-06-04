@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package tutorial.v1;
+
+option go_package = "tutorial.io/proto/v1;tutorialv1";
+
+enum Channel {
+  CREDIT_CARD = 0;
+  WEB_ATM = 1;
+}
+
+enum Provider {
+  ECPAY = 0;
+}
+
+message PaymentRequest {
+  Provider provider = 1;
+  Channel channel = 2;
+  int32 amount = 3;
+  int32 scale = 4;
+}

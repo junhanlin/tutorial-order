@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package tutorial.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "v1/common.proto";
+
+option go_package = "tutorial.io/proto/v1;tutorialv1";
+
+message Member {
+  string member_id = 1;
+  string name = 2;
+}
+
+message CreateMemberRequest {
+  string name = 1;
+}
+
+message UpdateMemberRequest {
+  string member_id = 1;
+  string name = 2;
+}
+
+message DeleteMemberRequest {
+  string member_id = 1;
+}
+
+message ListMembersRequest {
+  int32 page = 1;
+  int32 size = 2;
+}
+
+message ListMemberResponse {
+  repeated Member members = 1;
+  Paging paging = 2;
+}
+
+
+service MemberService {
+  rpc CreateMember(CreateMemberRequest) returns (Member) {}
+  rpc UpdateMember(UpdateMemberRequest) returns (Member) {}
+  rpc DeleteMember(DeleteMemberRequest) returns (google.protobuf.Empty) {}
+  rpc ListMembers(ListMembersRequest) returns (ListMemberResponse) {}
+}
